@@ -11,10 +11,6 @@ echo $ip_02
 echo $ip_03
 echo $ip_04
 
-# clear qdisc
-tc qdisc del dev eth0 root    2> /dev/null > /dev/null
-tc qdisc del dev eth0 ingress 2> /dev/null > /dev/null
-
 # bandwidth split
 tc qdisc add dev eth0 parent 1:1 handle 10:0 htb default 30
 
