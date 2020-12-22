@@ -1,0 +1,10 @@
+# test output
+sudo docker run --rm --name test-iperf3 --volume 4regionsltc_4region_out:/usr/src/out -it my-iperf3:v0.1
+
+sudo docker run --rm --name test-iperf3 --volume 4regionsltc_4region_out:/usr/src/out --network my-net --network-alias test -it my-iperf3:v0.1
+
+# remove all containers
+sudo docker rm -f $(sudo docker ps -a -q)
+
+# delete all none images
+sudo docker rmi $(sudo docker images | awk '{if ($2 == "<none>") print $3;}')

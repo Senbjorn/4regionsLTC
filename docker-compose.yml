@@ -1,0 +1,63 @@
+version: "3.3"
+
+volumes:
+        4region_out:
+
+services:
+        server:
+                image: my-server
+                volumes:
+                        - 4region_out:/usr/src/scripts/output
+                cap_add:
+                        - NET_ADMIN
+                environment:
+                        - IPERF_PORT=8080
+                        - IPERF_UDP_PORT=8081
+                        - CLIENT_O1=client-01
+                        - CLIENT_O2=client-02
+                        - CLIENT_O3=client-03
+                        - CLIENT_04=client-04
+        client-01:
+                image: my-client
+                volumes:
+                        - 4region_out:/usr/src/scripts/output
+                depends_on:
+                        - server
+                environment:
+                        - IPERF_PORT=8080
+                        - IPERF_UDP_PORT=8081
+                        - SERVER=server
+                        - CLIENT_NAME=client-01
+        client-02:
+                image: my-client
+                volumes:
+                        - 4region_out:/usr/src/scripts/output
+                depends_on:
+                        - server
+                environment:
+                        - IPERF_PORT=8080
+                        - IPERF_UDP_PORT=8081
+                        - SERVER=server
+                        - CLIENT_NAME=client-02
+        client-03:
+                image: my-client
+                volumes:
+                        - 4region_out:/usr/src/scripts/output
+                depends_on:
+                        - server
+                environment:
+                        - IPERF_PORT=8080
+                        - IPERF_UDP_PORT=8081
+                        - SERVER=server
+                        - CLIENT_NAME=client-03
+        client-04:
+                image: my-client
+                volumes:
+                        - 4region_out:/usr/src/scripts/output
+                depends_on:
+                        - server
+                environment:
+                        - IPERF_PORT=8080
+                        - IPERF_UDP_PORT=8081
+                        - SERVER=server
+                        - CLIENT_NAME=client-04
